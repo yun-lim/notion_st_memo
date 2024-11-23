@@ -12,7 +12,20 @@
           "package_name": "com.peter.notionstmemo"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "127581901148-nn930qnu3f9vep8vvutpto18tcgreq84.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.peter.notionstmemo",
+            "certificate_hash": "64983e64d286324e0c1050118d22e29e57cb7992"
+          }
+        },
+        {
+          "client_id": "127581901148-rp3gmt8eann57srjdn512igitb6869am.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCMfAGnbYBxZlVAFR_eo62qzQgnXVqtdNc"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "127581901148-rp3gmt8eann57srjdn512igitb6869am.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "127581901148-kthm3jvm33aijb5icl89d2r43r7eh9nr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.challenge8"
+              }
+            }
+          ]
         }
       }
     }

@@ -65,4 +65,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'notion-st-memo.firebasestorage.app',
     iosBundleId: 'com.example.challenge8',
   );
+
 }
