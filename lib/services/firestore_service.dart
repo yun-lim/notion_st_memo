@@ -71,20 +71,32 @@ class FirestoreService {
     });
   }
 
-  // 노트 검색
-  Stream<List<Note>> searchNotes(String query) {
+  // 노트 검색 또는 전체 노트 가져오기
+  Stream<List<Note>> searchNotes(String? query) {
     final userId = _authService.currentUser?.uid;
     if (userId == null) return Stream.value([]);
 
-    return _firestore
-        .collection('notes')
-        .where('userId', isEqualTo: userId)
-        .orderBy('title')
-        .startAt([query])
-        .endAt([query + '\uf8ff'])
+    var ref = _firestore.collection('notes').where('userId', isEqualTo: userId);
+
+    // 검색어가 없으면 최신순으로 정렬
+    if (query == null || query.isEmpty) {
+      return ref.orderBy('updatedAt', descending: true).snapshots().map(
+          (snapshot) =>
+              snapshot.docs.map((doc) => Note.fromFirestore(doc)).toList());
+    }
+
+    // 검색어가 있으면 제목과 내용에서 검색
+    final lowercaseQuery = query.toLowerCase();
+    return ref
+        .orderBy('updatedAt', descending: true)
         .snapshots()
         .map((snapshot) {
-          return snapshot.docs.map((doc) => Note.fromFirestore(doc)).toList();
-        });
+      return snapshot.docs.map((doc) => Note.fromFirestore(doc)).where((note) {
+        final title = note.title.toLowerCase();
+        final content = note.content.toLowerCase();
+        return title.contains(lowercaseQuery) ||
+            content.contains(lowercaseQuery);
+      }).toList();
+    });
   }
 }
